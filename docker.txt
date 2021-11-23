@@ -1,0 +1,98 @@
+版本查詢
+docker version
+
+查看 Docker 資訊
+docker info
+
+常用指令
+docker --help
+
+查看特定指令細節說明
+docker help COMMAND
+
+列出現有的 images
+docker images [OPTIONS]
+    -a (列出本地所有images，包含中間層)
+    -q (只顯示image ID)
+    --digests (顯示image的摘要訊息)
+    --no-trunc (顯示完整的image訊息)
+	
+查詢遠端倉庫(docker hub)的 image
+docker search [OPTIONS] REPONAME
+    -s [number] (列出 stars 數不小於[number]的 repo)
+    --automated (只列出 automated build 類型的 images)
+    --no-trunc (顯示完整的image訊息)
+	
+下載遠端倉庫(docker hub)的 image
+docker pull REPONAME[:TAG]
+
+
+刪除 image
+docker rmi [OPTIONS] IMAGE[:TAG]
+    -f (強制刪除，即使在運行中)
+
+刪除所有 images
+docker rmi -f $(docker images -q)
+docker rmi -f $(docker images -qa) (包含所有中間層)
+
+列出 image 歷史
+docker history IMAGE
+
+
+Container 相關命令
+
+將 image 實例化為 container 並執行
+docker run [OPTIONS] IMAGE
+        --name (為該容器命名)
+        -d (啟動守護式容器(常用於後台應用) -> 不需與 container 終端交互)
+        -i (啟動互動式容器(常用於前台應用) -> 登入 container 時可與終端交互，通常與 -t 同時使用)
+        -t (自動打開該 container 終端介面)
+        -P (隨機 port 映射)
+        -p [vps port]:[container port] (指定 port 映射)
+		
+列出 docker 所有運行中的 container
+docker ps [OPTIONS]
+        -a (列出正在運行及歷史上運行過的容器)
+        -l (列出最近一個執行的容器)
+        -n [number] (列出最近[number]個運行的容器)
+        -q (只顯示容器編號)
+		
+刪除已停止運行的 container
+
+刪除單個
+docker rm NAME|ID
+
+刪除全部
+docker rm $(docker ps -qa)
+docker ps -qa | xargs docker rm
+
+重啟正在運行的 container
+docker restart NAME|ID
+
+查看容器日誌 logs
+docker logs [OPTIONS] NAME|ID
+        -t (顯示各 log 時間)
+        -f (即時更新)
+        --tail [number] (只看最後 [number] 行)
+		
+查看容器內執行中的進程
+docker top [OPTIONS] NAME|ID
+
+查看容器內部細節
+docker inspect [OPTIONS] NAME|ID
+
+進入正在執行的容器並以終端機交互
+
+進入容器開啟終端，且不開啟新的進程。
+attach	
+docker attach [OPTIONS] CONTAINER
+啟動容器中新的終端，並開啟新進程	
+exec
+docker exec -it d2ea08ddc42c /bin/bash
+
+修改並提交現有容器成為一個新的 image
+docker commit [OPTION] CONTAINER [REPOSITORY[:TAG]]
+        -a="" (作者)
+        -m="" (提交訊息)
+        -c (將 Dockerfile 指令應用於創建的映像)
+        -p (再提交時暫停容器運作，預設為true)
