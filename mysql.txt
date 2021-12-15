@@ -57,3 +57,43 @@ select * from 資料表名稱 limit 8, 10;	第9筆開始選取10筆
 select * from 資料表名稱 order by 欄位名;	
 查詢結果遞減排序	
 select * from 資料表名稱 order by 欄位名 desc ;
+
+
+資料操作語言：
+DML(Data Manipulation Language)
+用來處理資料表裡的資料。
+
+
+資料定義語言：
+DDL(Data Definition Language)
+用來定義資料庫、資料表、檢視表、索引、預存程序、觸發程序、函數等資料庫物件。
+可以用來建立、更新、刪除 table,schema,domain,index,view
+
+資料查詢語言：
+DQL(Data Query Language)
+負責進行資料查詢，不會對資料本身進行修改的語句
+用來查詢資料表裡的資料。
+
+（Transaction）是一個單元工作（unit of work），包括一個起始點，標註交易開始，這個單元工作包括了數個步驟來完成，交易結束時的動作有兩個，
+數個步驟全部執行成功，交易才算成功並提交變 更，只有當中有一個失敗，則整個交易宣告失敗並回復所有變更。
+
+1）./test.sh
+
+2）sh test.sh
+
+3）. test.sh
+
+4）source test.sh
+
+他們有何區別？
+
+1）第一種方式，是在當前的shell執行指令碼本身，也就是說把test.sh當成一個檔案執行，這時候我們需要擁有test.sh的執行許可權（x許可權），而且當我們在執行此命令時，
+有2個新程序在執行，一個是test.sh，一個是sleep，如果我們在執行第一個sleep時按ctrl+c終止指令碼，test.sh和sleep一起終止，並且第二個sleep不會執行，因為整個test.sh執行已經終止。
+
+2）第二種方式，是新建一個shell執行test.sh腳本里面的命令，不需要執行許可權，有讀取許可權（r許可權）即可，在執行此命令時，
+有2個新程序在執行，一個是bash，一個是sleep，如果執行第一個sleep時按ctrl+c，bash被終止，結果和第一種方式一樣，第二個sleep不會執行。
+
+3）第三種方式，是在當前shell執行test.sh裡面的命令，不需要執行許可權，有讀取許可權（r許可權）即可，在執行此命令時，只有一個新程序在執行，就是sleep，
+如果在執行第一個sleep時按ctrl+c終止，那麼第二個sleep接著執行，直到指令碼所有命令執行完。
+
+4）第四種方式和第三種方式一致。

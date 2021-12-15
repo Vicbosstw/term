@@ -111,3 +111,38 @@ sudo
 	-V：列出 sudo 的版本資訊
 	-u ：以另一個 user 身份執行指令
 	-s：執行環境變數中的 SHELL 所指定的 shell，或 /etc/passwd 裡所指定的 shell
+
+user改密碼
+Linux修改密码用 passwd 命令，用root用户运行passwd ，passwd user_name可以设置或修改任何用户的密码，普通用户运行passwd只能修改它自己的密码。
+	-k ##keep-tokens keep non-expired authentication tokens 注：保留即将过期的用户在期满后能仍能使用；
+	-d ##delete delete the password for the named account (root only) 注：删除用户密码，仅能以root权限操作；
+	-l ##lock lock the named account (root only) 注：锁住用户无权更改其密码，仅能通过root权限操作；
+	-u ##unlock unlock the named account (root only) 注：解除锁定；
+	-f ##force force operation 注：强制操作；仅root权限才能操作；
+	-x ##maximum=DAYS maximum password lifetime (root only) 注：两次密码修正的最大天数，后面接数字；仅能root权限操作；
+	-n ##minimum=DAYS minimum password lifetime (root only) 注：两次密码修改的最小天数，后面接数字，仅能root权限操作；
+	-w ##warning=DAYS 注：在距多少天提醒用户修改密码；仅能root权限操作；
+	-i ##inactive=DAYS 注：在密码过期后多少天，用户被禁掉，仅能以root操作；
+	-S ##status report password status on the named account (root only) 注：查询用户的密码状态，仅能root用户操作；
+壓縮
+tar
+	-c  ：建立打包檔案，可搭配 -v 來察看過程中被打包的檔名(filename)
+	-t  ：察看打包檔案的內容含有哪些檔名，重點在察看『檔名』就是了；
+	-x  ：解打包或解壓縮的功能，可以搭配 -C (大寫) 在特定目錄解開     特別留意的是， -c, -t, -x 不可同時出現在一串指令列中。
+	-z  ：透過 gzip  的支援進行壓縮/解壓縮：此時檔名最好為 *.tar.gz
+	-j  ：透過 bzip2 的支援進行壓縮/解壓縮：此時檔名最好為 *.tar.bz2
+	-J  ：透過 xz    的支援進行壓縮/解壓縮：此時檔名最好為 *.tar.xz      特別留意， -z, -j, -J 不可以同時出現在一串指令列中
+	-v  ：在壓縮/解壓縮的過程中，將正在處理的檔名顯示出來！
+	-f filename：-f 後面要立刻接要被處理的檔名！建議 -f 單獨寫一個選項囉！(比較不會忘記)
+	-C 目錄    ：這個選項用在解壓縮，若要在特定目錄解壓縮，可以使用這個選項。
+|	:管線（pipe）
+>>	:用来将输入重定向到一个交互式 Shell 脚本或程序
+输出重定向是大于号(>)，输入重定向是小于号(<)，
+1>2&	:正确返回值传递给2输出通道 &2表示2输出通道
+
+su 切換身分
+su- 以root身分登入後再運行別的操作
+sudo 需要用戶的password，就能以其他身分運行命令(root)。並不是所有用戶能使用。
+
+foreign key constraint  意思
+外鍵是一個 (或多個) 指向其它資料表中主鍵的欄位，它限制欄位值只能來自另一個資料表的主鍵欄位，用來確定資料的參考完整性 (Referential Integrity)。
